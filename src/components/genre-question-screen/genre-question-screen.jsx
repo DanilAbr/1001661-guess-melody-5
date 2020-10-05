@@ -37,7 +37,34 @@ class GenreQuestionScreen extends PureComponent {
         </header>
 
         <section className="game__screen">
-          <h2 className="game__title">Выберите инди-рок треки</h2>
+          <h2 className="game__title">Выберите {genre} треки</h2>
+          <form className="game__tracks">
+            {answers.map((answer, index) => (
+              <div key={`${index}-${answer.src}`} className="track">
+                <button className="track__button track__button--play" type="button"></button>
+                <div className="track__status">
+                  <audio src={answer.src}></audio>
+                </div>
+                <div className="game__answer">
+                  <input className="game__input visually-hidden" type="checkbox" name="answer"
+                    value={`answer-${index}`}
+                    id={`answer-${index}`}
+                    checked={userAnswers[index]}
+                    onChange={(evt) => {
+                      const value = evt.target.checked;
+
+                      this.setState({
+                        answers: [...userAnswers.slice(0, index), value, ...userAnswers.slice(index + 1)],
+                      });
+                    }}
+                  />
+                  <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
+                </div>
+              </div>
+            ))}
+
+            <button className="game__submit button" type="submit">Ответить</button>
+          </form>
         </section>
       </section>
     );
