@@ -17,7 +17,7 @@ export default [
     }, {
       src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       genre: `rock`,
-    }],
+    }]
   }, {
     type: `artist`,
     song: {
@@ -33,6 +33,6 @@ export default [
     }, {
       picture: `${AVATAR_URL}/${Math.random()}`,
       artist: `Jim Beam`,
-    }],
+    }]
   }
 ];

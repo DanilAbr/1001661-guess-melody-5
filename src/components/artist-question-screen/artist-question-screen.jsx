@@ -16,7 +16,8 @@ const ArtistQuestionScreen = (props) => {
         </a>
 
         <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370" style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>
+          <circle className="timer__line" cx="390" cy="390" r="370"
+            style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
         <div className="game__mistakes">
@@ -32,7 +33,7 @@ const ArtistQuestionScreen = (props) => {
           <div className="track">
             <button className="track__button track__button--play" type="button"></button>
             <div className="track__status">
-              <audio src={song.src}></audio>
+              <audio src={song.src} />
             </div>
           </div>
         </div>

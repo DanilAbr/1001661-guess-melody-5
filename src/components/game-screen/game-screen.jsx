@@ -53,6 +53,7 @@ class GameScreen extends PureComponent {
 
     return <Redirect to="/" />;
   }
+
 }
 
 
