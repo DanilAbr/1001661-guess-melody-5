@@ -6,7 +6,7 @@ export default [
     type: `genre`,
     genre: `rock`,
     answers: [{
-      src: `https://upload.wikimedia.org/wikimedia/common/4/4e/BWV_543-fugue.ogg`,
+      src: `https://upload.wikimedia.org/wikimedia/commons/4/4e/BWV_543-fugue.ogg`,
       genre: `rock`,
     }, {
       src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
@@ -22,7 +22,7 @@ export default [
     type: `artist`,
     song: {
       artist: `Jim Beam`,
-      src: `https://upload.wikimedia.org/wikimedia/common/4/4e/BWV_543-fugue.ogg`,
+      src: `https://upload.wikimedia.org/wikimedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     answers: [{
       picture: `${AVATAR_URL}/${Math.random()}`,
