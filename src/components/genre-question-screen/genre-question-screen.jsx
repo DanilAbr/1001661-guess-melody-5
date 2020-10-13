@@ -1,21 +1,21 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {GameType} from '../../const';
-import AudioPlayer from '../audio-player/audio-player';
-
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import {GameType} from "../../const";
+import AudioPlayer from "../audio-player/audio-player";
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
+      activePlayer: 0,
       answers: [false, false, false, false],
     };
   }
 
   render() {
     const {onAnswer, question} = this.props;
-    const {answers: userAnswers} = this.state;
+    const {answers: userAnswers, activePlayer} = this.state;
     const {answers, genre} = question;
 
     return (
@@ -27,14 +27,13 @@ class GenreQuestionScreen extends PureComponent {
           </a>
 
           <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-            <circle className="timer__line" cx="390" cy="390" r="370"
-              style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
+            <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
           </svg>
 
           <div className="game__mistakes">
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-            <div className="wrong"></div>
+            <div className="wrong"/>
+            <div className="wrong"/>
+            <div className="wrong"/>
           </div>
         </header>
 
@@ -47,26 +46,30 @@ class GenreQuestionScreen extends PureComponent {
               onAnswer(question, this.state.answers);
             }}
           >
-            {answers.map((answer, index) => (
-              <div key={`${index}-${answer.src}`} className="track">
+            {answers.map((answer, i) => (
+              <div key={`${i}-${answer.src}`} className="track">
                 <AudioPlayer
-                  isPlaying={index === 0}
+                  onPlayButtonClick={() => {
+                    this.setState({
+                      activePlayer: activePlayer === i ? -1 : i,
+                    });
+                  }}
+                  isPlaying={i === activePlayer}
                   src={answer.src}
                 />
                 <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer"
-                    value={`answer-${index}`}
-                    id={`answer-${index}`}
-                    checked={userAnswers[index]}
+                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`}
+                    id={`answer-${i}`}
+                    checked={userAnswers[i]}
                     onChange={(evt) => {
                       const value = evt.target.checked;
 
                       this.setState({
-                        answers: [...userAnswers.slice(0, index), value, ...userAnswers.slice(index + 1)],
+                        answers: [...userAnswers.slice(0, i), value, ...userAnswers.slice(i + 1)],
                       });
                     }}
                   />
-                  <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
+                  <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
                 </div>
               </div>
             ))}
@@ -79,7 +82,6 @@ class GenreQuestionScreen extends PureComponent {
   }
 }
 
-
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: PropTypes.shape({
@@ -91,6 +93,5 @@ GenreQuestionScreen.propTypes = {
     type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
   }).isRequired,
 };
-
 
 export default GenreQuestionScreen;
