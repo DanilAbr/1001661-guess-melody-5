@@ -1,8 +1,8 @@
-import React, {PureComponent, Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 
-export default class AudioPlayer extends PureComponent {
+export default class AudioPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -17,22 +17,17 @@ export default class AudioPlayer extends PureComponent {
 
     this._audio = new Audio(src);
 
-    this._audio.oncanplaythrough = () =>
-      this.setState({
-        isLoading: false,
-      });
+    this._audio.oncanplaythrough = () => this.setState({
+      isLoading: false,
+    });
 
-    this._audio.onplay = () => {
-      this.setState({
-        isPlaying: true,
-      });
-    };
+    this._audio.onplay = () => this.setState({
+      isPlaying: true,
+    });
 
-    this._audio.onpause = () => {
-      this.setState({
-        isPlaying: false,
-      });
-    };
+    this._audio.onpause = () => this.setState({
+      isPlaying: false,
+    });
   }
 
 
@@ -47,7 +42,7 @@ export default class AudioPlayer extends PureComponent {
     const {isLoading, isPlaying} = this.state;
 
     return (
-      <Fragment>
+      <React.Fragment>
         <button
           className={`track__button track__button--${isPlaying ? `pause` : `play`}`}
           type="button"
@@ -57,7 +52,7 @@ export default class AudioPlayer extends PureComponent {
         <div className="track__status">
           <audio />
         </div>
-      </Fragment>
+      </React.Fragment>
     );
   }
 
