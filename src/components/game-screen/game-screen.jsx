@@ -27,17 +27,19 @@ const GameScreen = (props) => {
   switch (question.type) {
     case GameType.ARTIST:
       return (
-        <ArtistQuestionScreenWrapped>
+        <ArtistQuestionScreenWrapped
           question={question}
           onAnswer={onUserAnswer}
+        >
           <Mistakes count={mistakes} />
         </ArtistQuestionScreenWrapped>
       );
     case GameType.GENRE:
       return (
-        <GenreQuestionScreenWrapped>
+        <GenreQuestionScreenWrapped
           question={question}
           onAnswer={onUserAnswer}
+        >
           <Mistakes count={mistakes} />
         </GenreQuestionScreenWrapped>
       );

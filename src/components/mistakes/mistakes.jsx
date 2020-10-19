@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 const Mistakes = (props) => {
   const {count} = props;
 
-  const mistakes = Array.from({length: count});
-  console.log(mistakes);
+  const mistakes = new Array(count).fill(``);
 
   return (
     <div className="game__mistakes">
