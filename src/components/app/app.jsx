@@ -1,11 +1,12 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
 import WinScreen from '../win-screen/win-screen';
 import GameScreen from '../game-screen/game-screen';
-import {MAX_MISTAKE_COUNT} from "../../const";
+import {MAX_MISTAKE_COUNT} from '../../const';
 
 
 const App = () => {
@@ -13,12 +14,12 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/"
-          render={({history}) => (
+          render={({history}) =>
             <WelcomeScreen
               onPlayButtonClick={() => history.push(`/game`)}
               errorsCount={MAX_MISTAKE_COUNT}
             />
-          )}
+          }
         />
         <Route exact path="/login">
           <AuthScreen />

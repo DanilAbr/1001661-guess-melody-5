@@ -14,15 +14,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.INCREMENT_STEP:
       let nextStep = state.step + action.payload;
 
-      return extend(state, {
-        step: nextStep,
-      });
+      return extend(state, {step: nextStep});
     case ActionType.INCREMENT_MISTAKES:
       const mistakes = state.mistakes + action.payload;
 
       if (mistakes >= MAX_MISTAKE_COUNT) {
         return extend({}, initialState);
       }
+
       return extend(state, {
         mistakes: state.mistakes + action.payload,
       });
