@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
-import {GameType} from '../../const';
 import {connect} from 'react-redux';
+
+import {GameType} from '../../const';
+import Mistakes from '../mistakes/mistakes';
 import {ActionCreator} from '../../store/action';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
-import Mistakes from '../mistakes/mistakes';
+
 import artistQuestionProp from '../artist-question-screen/artist-question.prop';
 import genreQuestionProp from '../genre-question-screen/genre-question.prop';
 
 import withAudioPlayer from '../hocs/with-audio-player/with-audio-player';
+import withUserAnswer from '../hocs/with-user-answer/with-user-answer';
 
-const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
+const GenreQuestionScreenWrapped = withAudioPlayer(withUserAnswer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 
 
@@ -53,7 +56,10 @@ const GameScreen = (props) => {
 
 GameScreen.propTypes = {
   questions: PropTypes.arrayOf(
-      PropTypes.oneOfType([artistQuestionProp, genreQuestionProp]).isRequired
+      PropTypes.oneOfType([
+        artistQuestionProp,
+        genreQuestionProp
+      ]).isRequired
   ),
   step: PropTypes.number.isRequired,
   resetGame: PropTypes.func.isRequired,
