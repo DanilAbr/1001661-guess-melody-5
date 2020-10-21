@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import genreQuestionProp from './genre-question.prop';
+import GenreQuestionItem from '../genre-question-item/genre-question-item';
 
 
 const GenreQuestionScreen = (props) => {
@@ -39,22 +40,15 @@ const GenreQuestionScreen = (props) => {
             onAnswer();
           }}
         >
-          {answers.map((answer, i) => (
-            <div key={`${i}-${answer.src}`} className="track">
-              {renderPlayer(answer.src, i)}
-              <div className="game__answer">
-                <input
-                  className="game__input visually-hidden"
-                  type="checkbox"
-                  name="answer"
-                  value={`answer-${i}`}
-                  id={`answer-${i}`}
-                  checked={userAnswers[i]}
-                  onChange={(evt) => onChange(i, evt.target.checked)}
-                />
-                <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
-              </div>
-            </div>
+          {answers.map((answer, index) => (
+            <GenreQuestionItem
+              answer={answer}
+              id={index}
+              key={`${index}-${answer.src}`}
+              onChange={onChange}
+              renderPlayer={renderPlayer}
+              userAnswer={userAnswers[index]}
+            />
           ))}
 
           <button className="game__submit button" type="submit">Ответить</button>
@@ -72,5 +66,6 @@ GenreQuestionScreen.propTypes = {
   children: PropTypes.element.isRequired,
   userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
+
 
 export default GenreQuestionScreen;
