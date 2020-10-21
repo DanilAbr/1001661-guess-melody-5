@@ -66,4 +66,4 @@ const withAudio = (Component) => {
   return WithAudio;
 };
 
-export default WithAudio;
+export default withAudio;
