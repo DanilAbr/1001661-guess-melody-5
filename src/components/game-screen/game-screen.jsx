@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {GameType} from '../../const';
+import {GameType, MAX_MISTAKE_COUNT} from '../../const';
 import Mistakes from '../mistakes/mistakes';
 import {ActionCreator} from '../../store/action';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
@@ -20,13 +20,15 @@ const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 
 
 const GameScreen = (props) => {
-  const {questions, step, onUserAnswer, resetGame, mistakes} = props;
+  const {questions, step, onUserAnswer, mistakes} = props;
   const question = questions[step];
 
-  if (step >= questions.length || !question) {
-    resetGame();
+  if (mistakes >= MAX_MISTAKE_COUNT) {
+    return <Redirect to="/lose" />;
+  }
 
-    return <Redirect to="/" />;
+  if (step >= questions.length || !question) {
+    return <Redirect to="/result" />;
   }
 
   switch (question.type) {
@@ -62,7 +64,6 @@ GameScreen.propTypes = {
       ]).isRequired
   ),
   step: PropTypes.number.isRequired,
-  resetGame: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
   mistakes: PropTypes.number.isRequired,
 };
