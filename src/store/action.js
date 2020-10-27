@@ -6,6 +6,7 @@ const ActionType = {
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
   RESET_GAME: `RESET_GAME`,
+  LOAD_QUESTIONS: `LOAD_QUESTIONS`
 };
 
 const incrementStep = () => ({
@@ -35,5 +36,15 @@ const incrementMistake = (question, userAnswer) => {
   };
 };
 
+const loadQuestions = (questions) => ({
+  type: ActionType.LOAD_QUESTIONS,
+  payload: questions,
+});
 
-export {ActionType, incrementStep, resetGame, incrementMistake};
+export {
+  ActionType,
+  incrementStep,
+  resetGame,
+  incrementMistake,
+  loadQuestions
+};
