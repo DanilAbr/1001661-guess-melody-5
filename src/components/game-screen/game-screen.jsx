@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {GameType, MAX_MISTAKE_COUNT} from '../../const';
 import Mistakes from '../mistakes/mistakes';
-import {ActionCreator} from '../../store/action';
+import {incrementMistake, incrementStep, resetGame} from '../../store/action';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 
@@ -75,12 +75,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  resetGame() {
-    dispatch(ActionCreator.resetGame());
+  resetGameAction() {
+    dispatch(resetGame());
   },
   onUserAnswer(question, answer) {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(question, answer));
+    dispatch(incrementStep());
+    dispatch(incrementMistake(question, answer));
   },
 });
 
