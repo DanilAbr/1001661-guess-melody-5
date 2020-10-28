@@ -24,7 +24,6 @@ const store = createStore(
     )
 );
 
-
 store.dispatch(fetchQuestionList());
 store.dispatch(checkAuth());
 

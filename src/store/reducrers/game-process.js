@@ -1,6 +1,7 @@
 import {extend} from '../../utils';
 import {ActionType} from '../action';
 
+
 const initialState = {
   mistakes: 0,
   step: 0,
