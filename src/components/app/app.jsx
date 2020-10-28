@@ -6,6 +6,7 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
 import WinScreen from '../win-screen/win-screen';
+import PrivateRoute from '../private-route/private-route';
 import GameScreen from '../game-screen/game-screen';
 
 
@@ -21,10 +22,17 @@ const App = () => {
             />
           }
         />
-        <Route exact path="/login">
-          <AuthScreen />
-        </Route>
-        <Route exact
+        <Route
+          exact
+          path="/login"
+          render={({history}) => (
+            <AuthScreen
+              onReplayButtonClick={() => history.push(`/game`)}
+            />
+          )}
+        />
+        <PrivateRoute
+          exact
           path="/result"
           render={({history}) =>
             <WinScreen
@@ -32,7 +40,8 @@ const App = () => {
             />
           }
         />
-        <Route exact
+        <Route
+          exact
           path="/lose"
           render={({history}) =>
             <GameOverScreen
