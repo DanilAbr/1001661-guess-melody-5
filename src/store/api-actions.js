@@ -12,8 +12,9 @@ const fetchQuestionList = () => (dispatch, _getState, api) => (
 const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch((err) => {
-      throw err;
+    .catch((_err) => {
+      // throw err;
+      return false;
     })
 );
 

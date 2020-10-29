@@ -14,6 +14,8 @@ import genreQuestionProp from '../genre-question-screen/genre-question.prop';
 
 import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player';
 import withUserAnswer from '../../hocs/with-user-answer/with-user-answer';
+import {getQuestions} from '../../store/reducrers/game-data/selectors';
+import {getMistakes, getStep} from '../../store/reducrers/game-process/selectors';
 
 const GenreQuestionScreenWrapped = withAudioPlayer(withUserAnswer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
@@ -70,10 +72,10 @@ GameScreen.propTypes = {
   mistakes: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({GAME, DATA}) => ({
-  step: GAME.step,
-  mistakes: GAME.mistakes,
-  questions: DATA.questions,
+const mapStateToProps = (state) => ({
+  step: getStep(state),
+  mistakes: getMistakes(state),
+  questions: getQuestions(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

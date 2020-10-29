@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import {gameProcess} from './game-process';
-import {gameData} from './game-data';
+import {gameProcess} from './game-process/game-process';
+import {gameData} from './game-data/game-data';
 import {user} from './user';
 
 

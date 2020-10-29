@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {resetGame} from '../../store/action';
+import {getQuestions} from '../../store/reducrers/game-data/selectors';
+import {getMistakes} from '../../store/reducrers/game-process/selectors';
 
 
 const WinScreen = (props) => {
@@ -40,9 +42,9 @@ WinScreen.propTypes = {
 };
 
 
-const mapStateToProps = ({GAME}) => ({
-  questionsCount: GAME.step,
-  mistakesCount: GAME.mistakes,
+const mapStateToProps = (state) => ({
+  questionsCount: getQuestions(state),
+  mistakesCount: getMistakes(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
